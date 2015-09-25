@@ -1,0 +1,102 @@
+body {
+  background-image: url('/images/sea-wallpaper-for-walls-websites-to-download-9pki1zam.jpg');
+}
+.middle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 100px;
+    margin-left: 661px;
+    padding: 4px 10px;
+    justify-content: center;
+    background-color: darkcyan;
+    position: fixed;
+    border: 1px solid red;
+    box-shadow: 20px 20px darkslategray;
+}
+.left{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  float: left;
+}
+a:hover{
+  background-color: #003300;
+  color: yellow;
+}
+.options a{
+  color: #FFFFFF;
+  padding: 5px 10px;
+  color: #FFFFF5;
+  font-weight: bold;
+}
+.image{
+  padding: 5px;
+}
+.header{
+  height: 141px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-image: url('/images/images.jpg');
+  align-items: center;
+}
+.user_header{
+  background-image: url("/images/tweeties_free_twitter_icons1.jpg");
+  height: 331px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.headings{
+  letter-spacing: 2px;
+  font-weight: 800;
+  font-size: 25px;
+}
+.logout a{
+  color: #ffff;
+}
+.content{
+  display: flex;
+  align-items: center;
+  padding: 20px 10px;
+}
+.bold{
+  font-family: sans-serif;
+  font-weight: 800;
+  font-size:30px;
+}
+.user_content{
+  display: flex;
+  flex-direction:row;
+  justify-content: space-around;
+}
+#enter_tweets{
+  margin-top:20px;
+}
+#user_name{
+  border: 2px solid #0C2EA7;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 5px;
+  text-transform: capitalize;
+  height: 26px;
+  width: 154px;
+}
+.user_tweet{
+  border: 3px solid #ABE2FF;
+  margin: 20px;
+  min-height: 50px;
+  min-width: 200px;
+}
+#in_header{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #33699D;
+  margin: 5px;
+  padding: 10px;
+}
