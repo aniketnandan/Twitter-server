@@ -1,19 +1,47 @@
 var express=require('express');
 var router=express.Router();
-var dbfile=require('./twitter_db');
+var dbfile=require('./twitter_db.js');
 
 router.get('/',function(req,res){
-  res.render('twitter_showpage.ejs');
+  res.render('twitter_showpage');
 });
 
 router.get('/login',function(req,res){
-  res.render('twitter_login.ejs');
+  res.render('twitter_login');
 });
 
 router.get('/sign_up',function(req,res){
-  res.render('twitter_sign_up');
+  var error, success;
+  if(req.query.error===undefined && req.query.success===undefined){
+    res.render('twitter_sign_up',{msg: undefined});
+  }
+
+  else if(req.query.error){
+    error = req.query.error;
+    res.render('twitter_sign_up',{msg: error});
+  }
+
+  else if(req.query.success)
+  {
+    success = req.query.success;
+    res.render('twitter_sign_up',{msg: success});
+  }
+
+  console.log("error ",error);
+  console.log("success ", success);
 });
 
+router.post('/sign_up/create',function(req,res){
+  var name=req.body.user_name;
+  var email=req.body.email;
+  var password=req.body.con_pass;
+  dbfile.addRecord_user(name,email,password)
+    .then(function(result){
+      res.redirect('/sign_up?success=' + result);
+    }).catch(function(err){
+      res.redirect('/sign_up?error=' + err);
+    });
+});
 router.post('/login/checking_details',function(req,res){
   var mail=req.body.email_id;
   var password=req.body.password;
@@ -55,14 +83,5 @@ router.get('/login/:user/home',function(req,res){
 router.get('/login/user/logout',function(req,res){
   res.render('twitter_login.ejs');
 })
-
-router.post('/sign_up/create',function(req,res){
-  var name=req.body.user_name;
-  var email=req.body.email;
-  var password=req.body.con_pass;
-  dbfile.addRecord_user(name,email,password);
-  res.redirect('/');
-});
-
 
 module.exports=router;

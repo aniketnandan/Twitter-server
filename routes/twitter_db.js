@@ -1,28 +1,25 @@
 module.exports={
-  all:[],
-  check:[],
-  addRecord_user:function(name,email,password){
+  addRecord_user: function(name,email,password){
     var pg=require('pg');
     var connection="postgres://kreetiuser:root@localhost:5432/twitter";
     var qry="insert into user_sign_up(user_name,user_email,user_password) values('"+name+"','"+email+"','"+password+"')";
     var that=this;
-
-    pg.connect(connection,function(err,client){
-      if(err){
-        console.log("Error in connection with database",err);
-      }else{
-        client.query(qry,null,function(err,res){
-          if(err){
-            console.log("Error in storing your data",err);
-          }else{
-            that.all.push({'user':name, 'email':email, 'pass':password});
-            console.log("all array:",that.all);
-            console.log("Congratulation! your have successfully created your account");
-          }
-          pg.end();
-        });//client end
-      }
-    });//
+    return new Promise(function(resolve, reject){
+      pg.connect(connection,function(err,client){
+        if(err){
+          reject("Error in connection with database");
+        }else{
+          client.query(qry,null,function(err,res){
+            if(err){
+              reject(err.detail);
+            }else{
+              resolve("Congratulation! your have successfully created your account");
+            }
+            pg.end();
+          });//client end
+        }
+      });//
+    })
   },//addRecord user end
 
   find_id:function(user,cb){
@@ -36,7 +33,7 @@ module.exports={
       else{
         client.query(qry, null, function(err,res){
           if(res){
-           cb(res.rows[0].user_id);
+            cb(res.rows[0].user_id);
           }
         });// client end
       }

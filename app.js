@@ -7,7 +7,7 @@ var cookieParser = require('cookie-parser');
 var flash = require('connect-flash');
 var bodyParser = require('body-parser');
 var routes = require('./routes/index');
-var users = require('./routes/users');
+//var users = require('./routes/users');
 
 
 //var tweets = require('./routes/tweets');
@@ -30,7 +30,7 @@ app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use('/users', users);
+//app.use('/users', users);
 app.use('/', tweets);
 
 // catch 404 and forward to error handler
