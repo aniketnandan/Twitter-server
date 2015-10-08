@@ -11,6 +11,7 @@ module.exports={
         }else{
           client.query(qry,null,function(err,res){
             if(err){
+              console.log(err)
               reject(err.detail);
             }else{
               resolve("Congratulation! your have successfully created your account");
@@ -122,27 +123,32 @@ module.exports={
     var connection="postgres://kreetiuser:root@localhost:5432/twitter";
     var qry1="select user_password from user_sign_up where user_email='"+mail+"'";
     var qry2="select user_name from user_sign_up where user_email='"+mail+"'and user_password='"+password+"'";
-    var that=this;
-
-
-    pg.connect(connection,function(err,client){
-      if(err){
-        console.log("There is a server problem,please try again later!");
-      }
-      else{
-        client.query(qry1,null,function(err,res){
-          if(err){
-            console.log("your mail address or password does not match");
-          }
-          else{
-            var check_pass = res.rows[0].user_password;
-            client.query(qry2,null,function(err,res){
-              cb(res.rows[0].user_name);
-            });//qry2 client end
-          }
-        });//client end
-      }
-      pg.end();
-    })//pg closed
-  },//verify end
+    return new Promise(function(resolve,reject){
+      pg.connect(connection,function(err,client){
+        if(err){
+          reject("error in connection,try after some time");
+        }else{
+          client.query(qry1, null, function(error,response){
+            if(error){
+              reject("There is an error in checking your details. Please try after some time");
+            }else{
+              if(response.rows[0].user_password===password){
+                //              console.log("ok!!");
+                client.query(qry2, null, function(err,res){
+                  if(err){
+                    reject("No user name is available");
+                  }else{
+                    resolve(res.rows[0].user_name);
+                  }
+                });//qry2 end
+              }else{
+                reject("Sorry! you have entered wrong email address or password");
+              }
+            }
+          });//qry1 end
+        }
+        pg.end();
+      });//connection end
+    })//1st Promise end
+  }//verify end
 }//module exports end

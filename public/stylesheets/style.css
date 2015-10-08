@@ -1,8 +1,30 @@
 body {
   background-image: url('/images/sea-wallpaper-for-walls-websites-to-download-9pki1zam.jpg');
 }
+.error_msg {
+  border: 2px dashed #DEF3F4;
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px;
+  color: red;
+  display: inline-block;
+  margin-left: 638px;
+}
 .content{
   margin: 10px;
+}
+.footer{
+  border: 1px solid #00A8E9;
+  height: 60px;
+}
+.foo{
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
+  align-items: center;
+}
+div#name {
+  padding-right: 30px;
 }
 .middle {
   border: 1px solid blanchedalmond;
@@ -31,15 +53,6 @@ a:hover{
 .header{
   height: 141px;
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  background-image: url('/images/images.jpg');
-  align-items: center;
-}
-.header_sign_up{
-  height: 141px;
-  width: 100%;
   background-image: url('/images/images.jpg');
 }
 .head {
@@ -47,6 +60,33 @@ a:hover{
   flex-direction: row;
   justify-content: space-around;
   align-content: center;
+}
+.insert{
+  margin-top: 68px;
+  margin-left: 636px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.font-color{
+  padding: 5px;
+}
+span#HOME {
+  margin-top: 73px;
+  margin-left: 503px;
+}
+.insert_login{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.header_sign_up{
+  height: 141px;
+  width: 100%;
+  background-image: url('/images/images.jpg');
 }
 span#change_font {
   font-size: 18px;
