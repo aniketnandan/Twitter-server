@@ -8,3 +8,31 @@
 nav.links {
   margin-left: 700px;
 }
+
+span.gap_links_name{
+  padding: 0px 5px;
+}
+.contents_Info {
+  border: 1px solid red;
+  display: inline-block;
+  margin-left: 637px;
+  padding: 12px 36px;
+}
+.contents {
+  border: 2px solid red;
+  height: 900px;
+  width: 1544px;
+  margin: 9px;
+}
+body{
+  background-color: rgba(0, 51, 255, 0.29);
+}
+span.twitter_icon {
+  padding: 20px;
+}
+.notification_message {
+  margin: 0px 649px;
+  margin-top: 10px;
+  padding: 10px;
+  color: crimson;
+}

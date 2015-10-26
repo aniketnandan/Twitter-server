@@ -1,7 +1,7 @@
 module.exports={
   addRecord_user: function(name,email,password){
     var pg=require('pg');
-    var connection="postgres://kreetiuser:root@localhost:5432/twitter";
+    var connection="postgres://kreetiuser:kreeti@localhost:5432/twitter";
     var qry="insert into user_sign_up(user_name,user_email,user_password) values('"+name+"','"+email+"','"+password+"')";
     var that=this;
     return new Promise(function(resolve, reject){
@@ -44,8 +44,8 @@ module.exports={
 
   find_tweets:function(id,cb){
     var pg=require('pg');
-    var connection="postgres://kreetiuser:root@localhost:5432/twitter";
-    var qry="select tweets from user_page where user_id="+id;
+    var connection="postgres://kreetiuser:kreeti@localhost:5432/twitter";
+    var qry="select user_tweets from user_page where user_id="+id;
     var all=[];
     pg.connect(connection, function(err,client){
       if(err){
@@ -70,8 +70,8 @@ module.exports={
   findTime:function(userId,tweets,cb){
     console.log("in find time");
     var pg=require('pg');
-    var connection="postgres://kreetiuser:root@localhost:5432/twitter";
-    var qry="select id from user_page where tweets='"+tweet+"' and user_id="+userId;
+    var connection="postgres://kreetiuser:kreeti@localhost:5432/twitter";
+    var qry="select id from user_page where tweets='"+tweets+"' and user_id="+userId;
     pg.connect(connection, function(err,client){
       if(client){
         client.query(qry, null, function(err,res){
@@ -97,8 +97,8 @@ module.exports={
   submit_tweet:function(user_name,tweets,tweet_time){
     console.log("in submit_tweet");
     var pg=require('pg');
-    var connection="postgres://kreetiuser:root@localhost:5432/twitter";
-    var qry="insert into user_page (tweets,user_id,tweet_time) values('"+tweets+"',(select user_id from user_sign_up where user_name='"+user_name+"'),'"+tweet_time+"')";
+    var connection="postgres://kreetiuser:kreeti@localhost:5432/twitter";
+    var qry="insert into user_page (user_tweets,user_id,tweet_time) values('"+tweets+"',(select user_id from user_sign_up where user_name='"+user_name+"'),'"+tweet_time+"')";
 
     pg.connect(connection,function(err,client){
       if(err){
@@ -120,7 +120,7 @@ module.exports={
 
   verify:function(mail,password,cb){
     var pg=require('pg');
-    var connection="postgres://kreetiuser:root@localhost:5432/twitter";
+    var connection="postgres://kreetiuser:kreeti@localhost:5432/twitter";
     var qry1="select user_password from user_sign_up where user_email='"+mail+"'";
     var qry2="select user_name from user_sign_up where user_email='"+mail+"'and user_password='"+password+"'";
     return new Promise(function(resolve,reject){
@@ -130,10 +130,9 @@ module.exports={
         }else{
           client.query(qry1, null, function(error,response){
             if(error){
-              reject("There is an error in checking your details. Please try after some time");
+              reject("Problems in verifying your details,please try after soem time");
             }else{
               if(response.rows[0].user_password===password){
-                //              console.log("ok!!");
                 client.query(qry2, null, function(err,res){
                   if(err){
                     reject("No user name is available");

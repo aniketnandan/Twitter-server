@@ -1,10 +1,37 @@
+
 var express=require('express');
 var router=express.Router();
 var dbfile=require('./twitter_db.js');
 
 router.get('/',function(req,res){
   res.render('twitter');
-})
+});
+
+router.post('/post_details',function(req,res){
+  console.log("inside express");
+  var name=req.body.UserName;
+  var mail=req.body.Email;
+  var pass=req.body.Password;
+  console.log("name:",name,"mail:",mail,"pass:",pass);
+  dbfile.addRecord_user(name, mail, pass).then(function(result){
+    res.send(result)
+  }).catch(function(err){
+    res.send(err)
+  });
+});
+
+router.post('/verify',function(req,res){
+  var email = req.body.Email;
+  var pass = req.body.Password;
+  console.log(email,pass);
+  dbfile.verify(email,pass).then(function(result){
+    res.send(result);
+    console.log("OKKK!!!")
+  }).catch(function(error){
+    res.send(error);
+    console.log("ERROR!!!");
+  });
+});
 
 
 
