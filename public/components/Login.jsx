@@ -1,24 +1,29 @@
 import React from 'react';
-import Router, {Link} from 'react-router';
+import { Link } from 'react-router';
 
 var LogIn = React.createClass({
   contextTypes: {
-   router: React.PropTypes.object
+    router: React.PropTypes.object
+  },
+
+  getInitialState: function(){
+    return {
+      error_message: ''
+    };
   },
 
   handleSubmit: function(e){
     e.preventDefault();
     var email=React.findDOMNode(this.refs.email).value;
     var password=React.findDOMNode(this.refs.password).value;
-    console.log('Email address: ' + email + ', Password: ' + password );
     var options={method: 'POST', data:{ Email: email, Password: password}};
     fetch('/verify',options).then(function(result){
 
       this.context.router.transitionTo('user', { Profile_userName: result });
 
     }.bind(this)).catch(function(error){
-      console.error("there is an error ~~~~~ ", error);
-    });
+      this.setState({error_message: error});
+    }.bind(this));
 
   },
 
@@ -35,7 +40,7 @@ var LogIn = React.createClass({
         </div>
         <div className="contents">
           <div className="notification_message">
-
+            {this.state.error_message}
           </div>
           <div className="contents_Info">
             <form className="LogIn_Form" onSubmit={this.handleSubmit}>
@@ -48,8 +53,7 @@ var LogIn = React.createClass({
           </div>
         </div>
       </div>
-
-    )
+    );
   }
 });
 export default LogIn;

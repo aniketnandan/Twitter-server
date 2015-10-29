@@ -13,6 +13,7 @@ var ShowPage_head = React.createClass({
     );
   }
 });
+
 var Foo=React.createClass({
   render: function(){
     return(
@@ -20,10 +21,10 @@ var Foo=React.createClass({
         <div id="name">This site is created by Aniket Nandan</div>
         <a target="_blank" title="find us on Facebook" href="http://www.facebook.com/aniket.nandan.1"><img alt="follow me on facebook" src="//login.create.net/images/icons/user/facebook_40x40.png" border="0" /></a>
       </div>
-    )
+    );
   }
-})
+});
 
 
-React.render(<ShowPage_head />, document.querySelector(".header"));
-React.render(<Foo />,document.querySelector(".footer"));
+React.render(<ShowPage_head />, document.querySelector('.header'));
+React.render(<Foo />,document.querySelector('.footer'));

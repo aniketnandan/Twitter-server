@@ -1,11 +1,12 @@
 import React from 'react';
-import Router, {Link} from 'react-router';
+import {Link} from 'react-router';
+
 
 var SignUp = React.createClass({
   getInitialState: function(){
     return{
       message:''
-    }
+    };
   },
 
   handleSubmit: function(e){
@@ -14,12 +15,10 @@ var SignUp = React.createClass({
     var email = React.findDOMNode(this.refs.email).value;
     var password = React.findDOMNode(this.refs.pass).value;
     var options = {method: 'POST', data: {UserName: user_name, Email: email, Password: password}};
-    console.log("from jsx",options);
     fetch('/post_details',options).then(function(res){
-      console.log(res);
       this.setState({message: res});
     }.bind(this)).catch(function(error){
-      console.log(error);
+      this.setState({message: error});
     });
 
   },
@@ -55,6 +54,6 @@ var SignUp = React.createClass({
 
     );
   }
-})
+});
 
 export default SignUp;

@@ -1,5 +1,5 @@
 import React from 'react';
-import Router, {Route, Link, RouteHandler, Redirect} from 'react-router';
+import {Route, Link, RouteHandler, Redirect} from 'react-router';
 import LogIn from './Login.jsx';
 import SignUp from './Signup.jsx';
 import UserProfile from './user_profile.jsx';
@@ -19,9 +19,9 @@ var App = React.createClass({
         </div>
         <RouteHandler />
       </div>
-    )
+    );
   }
-})
+});
 
 var routes=(
   <Route>
@@ -29,14 +29,16 @@ var routes=(
       <Redirect from="home" to="/" />
     </Route>
 
-    <Route path = "login" handler={LogIn} >
+    <Route path = "/login" handler={LogIn} >
       <Route name="user" path = ":Profile_userName" handler = {UserProfile} />
     </Route>
 
     <Route path = "sign_up" handler={SignUp} />
   </Route>
 
-)
+);
 Router.run(routes, Router.HashLocation, (Root) => {
-  React.render(<Root />, document.body)
-})
+  /*eslint-disable*/
+  React.render(<Root />, document.body);
+  /*eslint-enable*/
+});

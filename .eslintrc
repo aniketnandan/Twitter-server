@@ -1,0 +1,55 @@
+{
+    "rules": {
+        "indent": [
+            2,
+            "tab"
+        ],
+        "quotes": [
+            2,
+            "single"
+        ],
+        "linebreak-style": [
+            2,
+            "unix"
+        ],
+        "semi": [
+            2,
+            "always"
+        ],
+        "require/require-define": [
+            0,
+            "always"
+        ],
+        "indent": [
+            0,
+            "tab"
+        ]
+    },
+
+    globals: {
+         'console': true,
+         'fetch': true,
+         'Router': true,
+         'React': true,
+         'components': true,
+         'document': true
+    },
+
+    "preferGlobal": true,
+    "parser": "babel-eslint",
+    "environment": {
+        "es6": true,
+        "node": true
+    },
+    "extends": "eslint:recommended",
+    "ecmaFeatures": {
+        "jsx": true,
+        "experimentalObjectRestSpread": true
+    },
+    "plugins": [
+        "react",
+        // Tell eslint about the require plugin
+        "require"
+    ]
+
+}
